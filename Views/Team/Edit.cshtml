@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Team
+@{
+    string title = ViewBag.Action + " Team";
+    ViewBag.Title = title;
+}
+<h2>@ViewBag.Title</h2>
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="TeamID" />
+
+    <div class="form-group row">
+        <label class="col-sm-2" asp-for="TeamName">Team:</label>
+        <input asp-for="TeamName" class="form-control col-sm-8" />
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2" asp-for="Conference">Conference: </label>
+        <select asp-for="Conference" class="form-control col-sm-8">
+            <option value="">select a Conference</option>
+            <option value="Eastern">Eastern</option>
+            <option value="Western">Western</option>
+        </select>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2" asp-for="Wins">Wins:</label>
+        <input asp-for="Wins" class="form-control col-sm-8" />
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2" asp-for="Losses">Losses:</label>
+        <input asp-for="Losses" class="form-control col-sm-8" />
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2" asp-for="PlayerID">Captain:</label>
+        <select asp-for="PlayerID" class="form-control col-sm-8">
+            <option value="">select a Captain</option>
+
+            @foreach (HockeyProject.Models.Player p in ViewBag.Players)
+            {
+                <option value="@p.PlayerID">@p.PlayerName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2" asp-for="CoachID">Coach:</label>
+        <select asp-for="CoachID" class="form-control col-sm-8">
+            <option value="">select a Coach</option>
+
+            @foreach (HockeyProject.Models.Coach c in ViewBag.Coaches)
+            {
+                <option value="@c.CoachID">@c.CoachName</option>
+            }
+        </select>
+    </div>
+
+
+    <input type="hidden" asp-for="TeamID" />
+    <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

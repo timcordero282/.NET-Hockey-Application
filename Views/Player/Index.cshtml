@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "All Players";
+}
+@model List<Player>
+
+<h2>Player List</h2>
+
+<a asp-controller="Player" asp-action="Add">Add New Player</a>
+<table class="table table-bordered table-striped table-light">
+    <thead>
+        <tr>
+            <th>Player ID</th>
+            <th>Player Name</th>
+            <th>Position</th>
+            <th>Country</th>
+            <th>Date Of Birth</th>
+            <th>Goals</th>
+            <th>Assists</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var pl in Model)
+        {
+        <tr>
+            <td>@pl.PlayerID</td>
+            <td>@pl.PlayerName</td>
+            <td>@pl.Position</td>
+            <td>@pl.Country</td>
+            <td>@pl.DateOfBirth</td>
+            <td>@pl.Goals</td>
+            <td>@pl.Assists</td>
+            <td>@pl.FindPoints()</td>            
+            <td>
+                <a asp-controller="Player" asp-action="Edit" asp-route-id="@pl.PlayerID"> Edit</a>
+                <a asp-controller="Player" asp-action="Delete" asp-route-id="@pl.PlayerID"> Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

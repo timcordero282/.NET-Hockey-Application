@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "All Coaches";
+}
+@model List<Coach>
+
+<h2>Coach List</h2>
+
+<a asp-controller="Coach" asp-action="Add">Add New Coach</a>
+<table class="table table-bordered table-striped table-light">
+    <thead>
+        <tr>
+            <th>Coach ID</th>
+            <th>Coach Name</th>
+            <th>Country</th>
+            <th>Date Of Birth</th>
+            <th>Career Wins</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var ch in Model)
+        {
+            <tr>
+                <td>@ch.CoachID</td>
+                <td>@ch.CoachName</td>
+                <td>@ch.Country</td>
+                <td>@ch.DateOfBirth</td>
+                <td>@ch.CareerWins</td>
+                <td>
+                    <a asp-controller="Coach" asp-action="Edit" asp-route-id="@ch.CoachID"> Edit</a>
+                    <a asp-controller="Coach" asp-action="Delete" asp-route-id="@ch.CoachID"> Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "NHL Hockey Teams";
+}
+@model List<Team>
+<h2 id="mainH2">NHL Hockey Teams (Top 8 per Conference)</h2>
+
+<a asp-controller="Team" asp-action="Add">Add New Team</a>
+<table class="table table-bordered table-striped table-light">
+    <thead>
+        <tr>
+            <th>Team ID</th>
+            <th>Team Name</th>
+            <th>Conference</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Winning %</th>
+            <th>Team Captain</th>
+            <th>Coach</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var team in Model)
+        {
+            <tr>
+                <td>@team.TeamID</td>
+                <td>@team.TeamName</td>
+                <td>@team.Conference</td>
+                <td>@team.Wins</td>
+                <td>@team.Losses</td>
+                <td>@team.WinningPCT() %</td>
+                <td>@team.PlayerName.PlayerName</td>
+                <td>@team.CoachName.CoachName</td>
+                <td>
+                    <a asp-controller="Team" asp-action="Edit" asp-route-id="@team.TeamID"> Edit</a>
+                    <a asp-controller="Team" asp-action="Delete" asp-route-id="@team.TeamID"> Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
